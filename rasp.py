@@ -6,29 +6,29 @@ class Rasp(object):
 	def __init__(self):
 		
 
-		self.lampR = 11 #Right Lamp pin
-		self.lampL = 12 #Left lamp pin
-		self.water_pump = 13 # Water pupmp pin
+		self.lampR = 3 #Right Lamp pin
+		self.lampL = 5 #Left lamp pin
+		self.water_pump = 7 # Water pupmp pin
 
-		self.coolers = 14 #coolers pin
+		self.coolers = 13 #coolers pin
 
 #		self.channel_output = (self.lampR, self.lampL, self.water_pump, self.coolers)
-
+		GPIO.GPIO.setwarnings(False)
 		GPIO.setmode(GPIO.BOARD) #Configure the board
 		GPIO.setup(self.lampR, GPIO.OUT)
 		GPIO.setup(self.lampL, GPIO.OUT)
 		GPIO.setup(self.water_pump, GPIO.OUT)
 		GPIO.setup(self.coolers, GPIO.OUT)
 
-		GPIO.output(self.coolers, True)
+		GPIO.output(self.coolers, False)
 
 
 	def lamps_on(self):
 
 		try:
 
-			GPIO.output(self.lampR, True)
-			GPIO.output(self.lampL, True)
+			GPIO.output(self.lampR, False)
+			GPIO.output(self.lampL, False)
 
 		except:
 
@@ -39,15 +39,15 @@ class Rasp(object):
 
 		try:
 
-			GPIO.output(self.lampR, False)
-			GPIO.output(self.lampL, False)
+			GPIO.output(self.lampR, True)
+			GPIO.output(self.lampL, True)
 
 		except:
 
 			return print("Can't possible turn of the lights")
 
 
-	def invert_state_lamps(self): # Invert the lamps state
+	def invert_lamps(self): # Invert the lamps state
 
 		try:
 
@@ -63,7 +63,7 @@ class Rasp(object):
 
 		try:
 
-			GPIO.output(self.water_pump, True)
+			GPIO.output(self.water_pump, False)
 
 		except:
 
@@ -73,7 +73,7 @@ class Rasp(object):
 
 		try:
 
-			GPIO.output(self.water_pump, False)
+			GPIO.output(self.water_pump, True)
 
 		except:
 

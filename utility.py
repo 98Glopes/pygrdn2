@@ -4,7 +4,7 @@ import time
 import sqlite3
 import cv2
 
-import rasp
+#import rasp
 
 
 def irriga():
@@ -134,10 +134,10 @@ class db_pictures(dataBase):
 		self.pic_name = pic_name
 
 		self.sql = """
-		INSERT INTO pictures (picutre)
+		INSERT INTO pictures (picture)
 		VALUES ?
 		"""
-		self.cursor.execute(sql, (self.pic_name,))
+		self.cursor.execute(self.sql, (self.pic_name,))
 		self.conn.commit()
 
 
@@ -148,7 +148,7 @@ class db_pictures(dataBase):
 		ORDER BY id DESC
 		LIMIT 1
 		"""
-		self.cursor.execute()
+		self.cursor.execute(self.sql)
 		return self.cursor.fetchone()
 
 

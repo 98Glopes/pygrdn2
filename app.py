@@ -5,6 +5,7 @@ import datetime as dt
 from meshlium import meshliumDB
 from routine import Routine
 import utility
+#import rasp
 
 app = Flask(__name__)
 
@@ -53,25 +54,34 @@ def dash():
 	return render_template('dash.html', header='Dashboard', title='PyGRDN2 - Dashboard', json=json)
 
 
-@app.route('/REST')
-def REST():
-#	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007', 'MeshliumDB')
-#	meshlium.sup_limit = dt.datetime.now()
-#	search, date= meshlium.read_msensors()
-#	print(date)
+@app.route('/rest/<change>')
+def rest(change):
 
-	json = jsonify({
-			'datas':[0,1,2],
-			'TC':[0,1,2],
-			'PRES':[0,1,2],
-			'HUM':[0,1,2],
-		})
-	return retorno
+	if change == 'lamps':
+
+		board.invert_lamps()
+		return 'ok'
+
+	if change == 'water_pump':
+
+		utility.irriga()
+		return 'ok'
+
+	if change == 'coolers':
+
+		board.invert_coolers()
+		return 'ok'
+
+	return 'nothing'
+
+
 
 
 
 	
 	
 if __name__ == '__main__':
+
+	board = rasp.Rasp()
 
 	app.run(port=80, debug=True, host='0.0.0.0')
