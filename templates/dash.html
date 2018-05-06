@@ -1,0 +1,54 @@
+{% extends "template.html" %} 
+{% block content %}
+
+
+	
+
+	
+
+	<form action="/dash" method="POST">
+		<div class="fifth"><h4>Intervalo de tempo - de:</h4></div>
+		<div class="fifth"><input type="hour" name="first_hour" placeholder="AAAA-MM-DD HH:MM" id="form"></div>
+		<div class="fifth" align="left"><h4>Até:</h4></div>
+		<div class="fifth"><input type="hour" name="last_hour" placeholder="AAAA-MM-DD HH:MM" id="form"></div>
+		<div class="fifth"><input type="submit" value="Enviar" id="dash_btn"></div>
+		<canvas id='chart'> </canvas>
+
+	</form>
+
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+	<script type="text/javascript" src="./static/js/chart.js"></script>
+	<script type="text/javascript" src="./static/js/main.js"></script>
+	<script type="text/javascript">
+
+//		console.log()
+
+		var label = [{% for data in json.datas %}
+                   "{{ data }}",
+                  {% endfor %}];
+        var tc = [{% for data in json.TC %}
+                   "{{ data }}",
+                  {% endfor %}];
+        var hum = [{% for data in json.HUM %}
+                   "{{ data }}",
+                  {% endfor %}];
+        var press = [{% for data in json.PRES %}
+                   "{{ data }}",
+                  {% endfor %}];
+		Chart.defaults.global.responsive = true
+		new_chart(label, tc, hum, press);
+
+
+	</script>
+	<script type="text/javascript">
+		
+
+    console.log(label)
+	</script>
+
+	
+			
+			
+{% endblock %}

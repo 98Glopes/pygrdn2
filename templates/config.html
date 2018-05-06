@@ -1,0 +1,30 @@
+{% extends "template.html" %} 
+{% block content %}
+			
+	<div id="conteudo">
+	
+		<form action="/routine" method="POST">
+		
+		<div class="quarter"><h4>Primeira irrigação:</h4></div>
+		<div class="quarter"><input type="hour" name="first_irr" placeholder="HH:MM" id="form"></div>
+		<div class="quarter"><h4>Ultima irrigação:</h4></div>
+		<div class="quarter"><input type="hour" name="last_irr" placeholder="HH:MM" id="form"></div>
+		
+		<div class="quarter"><h4>Intervalo entre irrigações:</h4></div>
+		<div class="quarter"><input type="minutes" name="irr_interval" placeholder="Intervalo em minutos" id="form"></div>
+		<div class="quarter"><h4>Intervalo entre fotografias:</h4></div>
+		<div class="quarter"><input type="minutes" name="pic_interval" placeholder="Intervalo em minutos" id="form"></div>
+		
+		<div class="quarter"><h4>Inicio do periodo luminoso:</h4></div>
+		<div class="quarter"><input type="hour" name="lamps_on" placeholder="HH:MM" id="form"></div>
+		<div class="quarter"><h4>Fim do periodo luminoso:</h4></div>
+		<div class="quarter"><input type="hour" name="lamps_off" placeholder="HH:MM" id="form"></div>
+		
+		<align="center"><input type="submit" value="Enviar" id="form_button"></center>	
+	
+		</form>
+	
+	</div>
+			
+			
+{% endblock %}

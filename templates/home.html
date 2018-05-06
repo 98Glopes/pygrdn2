@@ -1,0 +1,37 @@
+{% extends "template.html" %} 
+{% block content %}
+
+<div class="mid">
+
+	<div class='title'><h3><center><b> Agora: </b></center></h3></div>
+
+	<div id="feed">
+
+	<div class="quarter"><h4 class="home">Temperatura: </h4></div>
+	<div class="quarter"><h4 class="home"> {{ data.TC }} ºC</h4></div>
+	<div class="quarter"><h4 class="home">Umidadade do Ar:</h4></div>
+	<div class="quarter"><h4 class="home"> {{ data.HUM }} %</h4></div>
+
+	<div class="quarter"><h4 class="home">Luminosidade: </h4></div>
+	<div class="quarter"><h4 class="home"> {{ data.PAR }} PAR</h4></div>
+	<div class="quarter"><h4 class="home">Bateria :</h4></div>
+	<div class="quarter"><h4 class="home"> {{ data.BAT }} %</h4></div>
+
+	<div class="quarter"><h4 class="home">Umidade do solo 1: </h4></div>
+	<div class="quarter"><h4 class="home"> {{ data.SOIL_E }} %</h4></div>
+	<div class="quarter"><h4 class="home">Umidade do solo 2:</h4></div>
+	<div class="quarter"><h4 class="home"> {{ data.SOIL_C }} %</h4></div>
+
+
+	</div>
+</div>
+
+<div class="mid">
+
+	<img src="./static/img/horta.jpg" class="img">
+
+</div>
+	
+			
+			
+{% endblock %}
