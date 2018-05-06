@@ -4,14 +4,24 @@ import time
 import sqlite3
 import cv2
 
+import rasp
+
 
 def irriga():
+	board = rasp.Rasp()
+	board.irrigation_on()
+	time.sleep(100) # Irrigation time = 100s
+	board.irrigation_off()
 	return print('Irrigando')
 	
 def lamps_on():
+	board = rasp.Rasp()
+	board.lamps_on()
 	return print('Ligando as luzes')
 	
 def lamps_off():
+	board = rasp.Rasp()
+	board = lamps_off()
 	return print('Apagando as luzes')
 	
 def picture():
@@ -151,26 +161,7 @@ def datetime_hour(date): #recebe como parametro um objeto datetime.datetime
 
 
 
-def clock():
 
-	while True:
-	
-		
-		hora_atual = datetime_hour(datetime.datetime.now())
-		#instancia classe para abrir o banco de dados na tabela 'alarm'
-		data = alarm() 
-		search = data.search(hora_atual)
-		
-		#executa as funções referentes aos alarmes
-		for behavior in search:
-			
-			print(hora_atual)
-			eval(behavior[0])
-		
-		#finaliza conexão com o banco de dados
-		data.close() 
-		
-		time.sleep(60)
 		
 		
 		

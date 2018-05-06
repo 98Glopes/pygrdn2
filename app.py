@@ -74,9 +74,4 @@ def REST():
 	
 if __name__ == '__main__':
 
-
-	thread = threading.Thread(target=utility.clock)
-	thread.start()
-
-
 	app.run(port=80, debug=True)

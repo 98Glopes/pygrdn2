@@ -7,21 +7,20 @@ class Rasp(object):
 		
 
 		self.lampR = 11 #Right Lamp pin
-		self.lampL = 11 #Left lamp pin
-		self.water_pump = 11 # Water pupmp pin
+		self.lampL = 12 #Left lamp pin
+		self.water_pump = 13 # Water pupmp pin
 
-		self.coolers = 11 #coolers pin
+		self.coolers = 14 #coolers pin
 
 #		self.channel_output = (self.lampR, self.lampL, self.water_pump, self.coolers)
 
-		GPIO.cleanup()
 		GPIO.setmode(GPIO.BOARD) #Configure the board
 		GPIO.setup(self.lampR, GPIO.OUT)
 		GPIO.setup(self.lampL, GPIO.OUT)
 		GPIO.setup(self.water_pump, GPIO.OUT)
 		GPIO.setup(self.coolers, GPIO.OUT)
 
-		GPIO.output(self.coolers, False)
+		GPIO.output(self.coolers, True)
 
 
 	def lamps_on(self):
@@ -105,7 +104,7 @@ class Rasp(object):
 
 	def current_state(self):
 
-		self.current_state = {
+		self.state = {
 			'lamps': GPIO.input(self.lampR) and GPIO.input(self.lampL),
 			'water_pump': GPIO.input(self.water_pump),
 			'coolers': GPIO.input(self.coolers)
