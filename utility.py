@@ -33,7 +33,7 @@ def picture():
 		if success == True:
 			cv2.imwrite('./static/img/pictures/'+name.replace(':','-'), img)
 			print(name)
-			database = db_pictures('database.db')
+			database = db_pictures()
 			database.burn(name.replace(':','-'))
 			database.close()
 	
