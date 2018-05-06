@@ -1,7 +1,7 @@
 import time
 import datetime
 
-from utility import alarm
+from utility import *
 
 def clock():
 
