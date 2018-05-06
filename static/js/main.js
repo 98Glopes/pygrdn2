@@ -29,17 +29,9 @@
     if (httpRequest.readyState === 4) {
       if (httpRequest.status === 200) {
 //		console.log(httpRequest.responseText);	
-		date = JSON.parse(httpRequest.responseText);
-    tc = date.TC;
-    hum = date.HUM ;
-    press = date.PRES;  
 	  } else {
         alert('There was a problem with the request.');
       }
     }
   }
   
-  function counter() {
-	count = count + 1;
-	console.log(count);	  
-  }

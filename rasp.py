@@ -13,7 +13,7 @@ class Rasp(object):
 		self.coolers = 13 #coolers pin
 
 #		self.channel_output = (self.lampR, self.lampL, self.water_pump, self.coolers)
-		GPIO.GPIO.setwarnings(False)
+		GPIO.setwarnings(False)
 		GPIO.setmode(GPIO.BOARD) #Configure the board
 		GPIO.setup(self.lampR, GPIO.OUT)
 		GPIO.setup(self.lampL, GPIO.OUT)

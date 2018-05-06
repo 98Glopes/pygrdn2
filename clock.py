@@ -21,6 +21,7 @@ def clock():
 		
 		#finaliza conexão com o banco de dados
 		data.close() 
+		print(hora_atual)
 		time.sleep(60)
 
 

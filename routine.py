@@ -62,3 +62,4 @@ def Routine(data):
 	data.clean() #limpa todos os alarmes do banco de dados
 	data.burn_list(alarms) #grava os alarmes gerados no banco de dados
 	data.close() #fecha o banco de dados
+	

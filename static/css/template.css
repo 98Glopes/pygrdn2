@@ -201,7 +201,7 @@ a.article, a.article:hover {
 
 .quarter {
 	width: 25%;
-	height: 50px;
+	height: 45px;
 	background-color: #F2FAF2;
 	float: left;
 	color: #20603C;
@@ -237,6 +237,24 @@ a.article, a.article:hover {
     height: auto;
     padding: 2%;
 
+}
+
+.three{
+    margin-top: 50px;
+    width: 33.33%;
+    padding: 9%;
+    float: left;
+
+}
+
+.img_home{
+    width: 100%;
+    height: auto;
+}
+
+.images {
+    padding-bottom: 30px;
+    width: 100%;
 }
 
 #feed {

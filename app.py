@@ -5,7 +5,7 @@ import datetime as dt
 from meshlium import meshliumDB
 from routine import Routine
 import utility
-#import rasp
+import rasp
 
 app = Flask(__name__)
 
