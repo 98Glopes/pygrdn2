@@ -68,12 +68,12 @@ class Rasp(object):
 			return print("Can't possible invert the lamps state")
 
 
-	def irriga(self, time):
+	def irriga(self, tempo):
 
 		try:
 
 			GPIO.output(self.water_pump, False)
-			time.sleep(time)
+			time.sleep(tempo)
 			GPIO.output(self.water_pump, True)
 			return print("Irrigando")
 
@@ -104,5 +104,18 @@ class Rasp(object):
 		}
 
 		return self.current_state
+
+	def picture():
+		def take_picture():
+			
+			name = picture_name()
+			cam  = cv2.VideoCapture(0) #0 é a webcam do notebook
+			success , img = cam.read()
+			if success == True:
+				cv2.imwrite('./static/img/pictures/'+name.replace(':','-'), img)
+				print(name)
+				
+		thread = threading.Thread(target=take_picture)
+		thread.start()
 
 
