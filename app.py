@@ -68,7 +68,7 @@ def rest(change):
 
 	if change == 'water_pump':
 
-		utility.irriga()
+		board.irriga()
 		return 'ok'
 
 	if change == 'coolers':

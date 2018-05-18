@@ -4,6 +4,8 @@ try:
 except:
 	pass
 
+import time
+
 	
 class Rasp(object):
 	""" Class for manipulate Raspberry IOs """
@@ -66,36 +68,20 @@ class Rasp(object):
 			return print("Can't possible invert the lamps state")
 
 
-	def irrigation_on(self):
+	def irriga(self, time):
 
 		try:
 
 			GPIO.output(self.water_pump, False)
-
-		except:
-
-			pass
-
-	def irrigation_off(self):
-
-		try:
-
+			time.sleep(time)
 			GPIO.output(self.water_pump, True)
+			return print("Irrigando")
 
 		except:
 
 			pass
 
 
-	def invert_irrigation(self):
-
-		try:
-
-			GPIO.output(self.water_pump, not GPIO.input(self.water_pump))
-
-		except:
-
-			pass
 
 
 	def invert_coolers(self):
