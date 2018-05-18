@@ -2,10 +2,10 @@ import time
 import datetime
 
 from utility import *
+import rasp
 
 
-
-def clock():
+def clock(board):
 
 	while True:
 	
@@ -19,7 +19,7 @@ def clock():
 		for behavior in search:
 			
 			print(hora_atual)
-			eval(behavior[0])
+			eval('board.'behavior[0])
 		
 		#finaliza conexão com o banco de dados
 		data.close() 
@@ -29,5 +29,5 @@ def clock():
 
 if __name__ == '__main__':
 
-#	check()  #Função não está funcionando
-	clock()
+	board = rasp.Rasp()
+	clock(board)
