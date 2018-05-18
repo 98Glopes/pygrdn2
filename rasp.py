@@ -1,26 +1,33 @@
-import RPi.GPIO as GPIO
 
+try:
+	import RPi.GPIO as GPIO
+except:
+	pass
+
+	
 class Rasp(object):
 	""" Class for manipulate Raspberry IOs """
 
 	def __init__(self):
+
 		
+		try:
+			self.lampR = 3 #Right Lamp pin
+			self.lampL = 5 #Left lamp pin
+			self.water_pump = 7 # Water pupmp pin
 
-		self.lampR = 3 #Right Lamp pin
-		self.lampL = 5 #Left lamp pin
-		self.water_pump = 7 # Water pupmp pin
+			self.coolers = 13 #coolers pin
 
-		self.coolers = 13 #coolers pin
+#			self.channel_output = (self.lampR, self.lampL, self.water_pump, self.coolers)
+			GPIO.setwarnings(False)
+			GPIO.setmode(GPIO.BOARD) #Configure the board
+			GPIO.setup(self.lampR, GPIO.OUT, initial=True)
+			GPIO.setup(self.lampL, GPIO.OUT, initial=True)
+			GPIO.setup(self.water_pump, GPIO.OUT, initial=True)
+			GPIO.setup(self.coolers, GPIO.OUT, initial=False)
 
-#		self.channel_output = (self.lampR, self.lampL, self.water_pump, self.coolers)
-		GPIO.setwarnings(False)
-		GPIO.setmode(GPIO.BOARD) #Configure the board
-		GPIO.setup(self.lampR, GPIO.OUT)
-		GPIO.setup(self.lampL, GPIO.OUT)
-		GPIO.setup(self.water_pump, GPIO.OUT)
-		GPIO.setup(self.coolers, GPIO.OUT)
-
-		GPIO.output(self.coolers, False)
+		except:
+			pass
 
 
 	def lamps_on(self):

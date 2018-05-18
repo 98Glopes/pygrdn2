@@ -2,10 +2,12 @@ import threading
 from flask import Flask, jsonify, render_template, request
 import json
 import datetime as dt
+import glob
 from meshlium import meshliumDB
 from routine import Routine
 import utility
 import rasp
+
 
 app = Flask(__name__)
 
@@ -25,18 +27,21 @@ def routine():
 
 @app.route('/')
 def home():
+
 	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
+	link = glob.glob('./static/img/pictures/*.jpg')
+	link = link[-1]
+	
 	data = meshlium.read_moment()
-	meshlium.close()
 	return render_template('home.html', header="PyGRDN2 - Acompanhe em tempo real",
-							title='PyGRDN2' , data=data)
+							title='PyGRDN2' , data=data, link=link)
 
 
 
 @app.route('/dash', methods=['POST','GET']) 
-def dash():
-	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
+def dash():	
 
+	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
 	if request.form:
 		print(request.form)
 		
@@ -44,7 +49,6 @@ def dash():
 		meshlium.sup_limit = request.form['last_hour']
 
 	search, date= meshlium.read_msensors()
-	meshlium.close()
 	json = {
 			'datas': date,
 			'TC': search[0],
@@ -74,14 +78,10 @@ def rest(change):
 
 	return 'nothing'
 
-
-
-
-
 	
 	
 if __name__ == '__main__':
 
-	board = rasp.Rasp()
-
+	board = rasp.Rasp() 	
+	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
 	app.run(port=80, debug=True, host='0.0.0.0')

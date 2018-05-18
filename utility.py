@@ -10,7 +10,7 @@ import cv2
 def irriga():
 	board = rasp.Rasp()
 	board.irrigation_on()
-	time.sleep(100) # Irrigation time = 100s
+	time.sleep(20) # Irrigation time = 100s
 	board.irrigation_off()
 	return print('Irrigando')
 	
@@ -33,10 +33,7 @@ def picture():
 		if success == True:
 			cv2.imwrite('./static/img/pictures/'+name.replace(':','-'), img)
 			print(name)
-			database = db_pictures()
-			database.burn(name.replace(':','-'))
-			database.close()
-	
+				
 	thread = threading.Thread(target=take_picture)
 	thread.start()
 	
@@ -60,6 +57,13 @@ def date_parser(timestamp): #Recebe uma str e retorna um date time
 	hour, minute = int(hora[0]), int(hora[1])
 
 	return datetime.datetime(year, month, day, hour, minute)
+
+
+def gen_datetime(hour): #recebe uma string 'HH:MM' e retorna um obj datetime (dia genérico)
+		hour = hour.split(':')
+		hours, minutes = int(hour[0]) , int(hour[1])
+		return datetime.datetime(2018, 1, 1, hours, minutes)
+
 	
 class dataBase(object): #classe Pai para iniciar o banco de dados
 	
@@ -110,7 +114,16 @@ class alarm(dataBase): #classe filha da classe dataBase
 		"""
 		self.cursor.execute(self.sql, (hour,))
 		return self.cursor.fetchall()
-		
+
+
+	def search_event(self, event):
+
+		self.event = event
+		self.sql = """
+		SELECT hour FROM alarm WHERE behavior = ?
+		"""
+		self.cursor.execute(self.sql, (self.event,))
+		return self.cursor.fetchone()[0]
 		
 	def all(self):
 	

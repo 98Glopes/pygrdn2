@@ -15,12 +15,12 @@ class meshliumDB(object): #Class for open the MeshliumDB
 		self.host = host
 		self.user = user
 		self.passw = passw
-		self.inf_limit = dt.datetime(2018,5,4,16,15)
+		self.inf_limit = dt.datetime.now()-dt.timedelta(days=1)
 		self.sup_limit = dt.datetime.now()
 
 		try:
 
-			self.conn = pymysql.connect('meshlium.db')
+			self.conn = pymysql.connect("meshlium.db")
 			self.cursor = self.conn.cursor()
 			return print('Database connected')
 

@@ -3,6 +3,8 @@ import datetime
 
 from utility import *
 
+
+
 def clock():
 
 	while True:
@@ -27,4 +29,5 @@ def clock():
 
 if __name__ == '__main__':
 
+#	check()  #Função não está funcionando
 	clock()
