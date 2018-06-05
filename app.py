@@ -5,6 +5,8 @@ import datetime as dt
 import glob
 from meshlium import meshliumDB
 from routine import Routine
+from clock import clock
+
 import utility
 import rasp
 
@@ -28,7 +30,7 @@ def routine():
 @app.route('/')
 def home():
 
-	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
+	meshlium = meshliumDB('172.16.232.105', 'root', 'libelium2007','MeshliumDB')
 	link = glob.glob('./static/img/pictures/*.jpg')
 	link = link[-1]
 	
@@ -41,7 +43,7 @@ def home():
 @app.route('/dash', methods=['POST','GET']) 
 def dash():	
 
-	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
+	meshlium = meshliumDB('172.16.232.105', 'root', 'libelium2007','MeshliumDB')
 	if request.form:
 		print(request.form)
 		
@@ -54,7 +56,10 @@ def dash():
 			'TC': search[0],
 			'PRES': search[1],
 			'HUM': search[2],
+			'SOIL_C': search[3],
+			'SOIL_E': search[4]
 		}
+
 	return render_template('dash.html', header='Dashboard', title='PyGRDN2 - Dashboard', json=json)
 
 
@@ -76,12 +81,19 @@ def rest(change):
 		board.invert_coolers()
 		return 'ok'
 
+
+	if change =='picture':
+
+		board.pictures()
+		return 'ok'
+
 	return 'nothing'
+
 
 	
 	
 if __name__ == '__main__':
 
-	board = rasp.Rasp() 	
-	meshlium = meshliumDB('172.16.54.69', 'root', 'libelium2007','MeshliumDB')
+	board = rasp.Rasp(10)
+	meshlium = meshliumDB('172.16.232.105', 'root', 'libelium2007','MeshliumDB')
 	app.run(port=80, debug=True, host='0.0.0.0')

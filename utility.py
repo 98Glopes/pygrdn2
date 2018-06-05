@@ -4,7 +4,7 @@ import time
 import sqlite3
 import cv2
 
-#import rasp
+import rasp
 
 
 def irriga():
@@ -124,7 +124,18 @@ class alarm(dataBase): #classe filha da classe dataBase
 		"""
 		self.cursor.execute(self.sql, (self.event,))
 		return self.cursor.fetchone()[0]
-		
+
+
+	def lamps(self):
+
+		self.sql = """
+		SELECT hour FROM alarm WHERE behavior = 'lamps_on()' or behavior = 'lamps_off()'
+		"""
+		self.cursor.execute(self.sql)
+		self.search = self.cursor.fetchall()
+		return self.search[0][0], self.search[1][0]
+
+
 	def all(self):
 	
 		self.sql = """

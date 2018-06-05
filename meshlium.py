@@ -1,4 +1,4 @@
-import sqlite3 as pymysql 
+import pymysql 
 import datetime as dt
 
 class meshliumDB(object): #Class for open the MeshliumDB
@@ -20,7 +20,7 @@ class meshliumDB(object): #Class for open the MeshliumDB
 
 		try:
 
-			self.conn = pymysql.connect("meshlium.db")
+			self.conn = pymysql.connect(self.host, self.user, self.passw, self.database)
 			self.cursor = self.conn.cursor()
 			return print('Database connected')
 
@@ -46,7 +46,7 @@ class meshliumDB(object): #Class for open the MeshliumDB
 		self.date = []
 		self.sql = """
 		SELECT value, timestamp FROM sensorParser
-		WHERE timestamp > ? and timestamp < ? and sensor = ?
+		WHERE timestamp > %s and timestamp < %s and sensor = %s
 		ORDER BY timestamp ASC
 		"""
 		self.cursor.execute(self.sql, (self.inf_limit, self.sup_limit, sensor))
@@ -59,7 +59,7 @@ class meshliumDB(object): #Class for open the MeshliumDB
 		return self.value, self.date
 
 
-	def read_msensors(self, sensors=['TC', 'PAR', 'HUM', 'BAT']): #Read mutiples sensors
+	def read_msensors(self, sensors=['TC', 'PAR', 'HUM', 'BAT', 'SOIL_C', 'SOIL_E']): #Read mutiples sensors
 		""" Return one list about each sensor, all in a list"""
 
 		self.sensors = sensors
